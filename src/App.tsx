@@ -2,8 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import useFakeFetch from "./customHooks/useFakeFetch";
 
 function App() {
+  const { response, error, isLoading } = useFakeFetch();
+
+  console.log(response, error, isLoading)
   return (
     <div className="App">
       <header className="App-header">
