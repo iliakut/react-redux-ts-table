@@ -1,37 +1,33 @@
 import data from '../data.json';
 import { useEffect, useState } from 'react';
+import { RowFirm } from '../types/types';
 
-const fakePromise = (): Promise<Firm[]> => {
-  const delay = Math.random() * 100;
-  const isResolve = delay < 50; // 90% success
+const fakePromise = (): Promise<RowFirm[]> => {
+  const delay = Math.random() * 1000;
+  const isResolve = delay < 900; // 90% success
 
   return new Promise((resolve, reject) => {
     if (isResolve) {
-      resolve(data);
+      return setTimeout(() => {
+        resolve(data);
+      }, delay)
     }
 
     reject({ error: 'Error fetching data' });
   });
 }
 
-type Firm = {
-  id: number
-  name: string
-  budget: number
-  budget_spent: number,
-  date_of_first_purchase: string
-}
-
 type fakeFetch = {
-  response: Firm[]
+  response: RowFirm[]
   error: { error: string } | null
   isLoading: boolean
 }
 
 const useFakeFetch = (): fakeFetch => {
-  const [response, setResponse] = useState<Firm[]>([]);
+  const [response, setResponse] = useState<RowFirm[]>([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);

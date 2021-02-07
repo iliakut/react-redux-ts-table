@@ -1,60 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, {useEffect} from 'react';
 import './App.css';
-import useFakeFetch from "./customHooks/useFakeFetch";
+import useFakeFetch from './customHooks/useFakeFetch';
+import { Container } from '@material-ui/core';
+import FirmsTable from './components/FirmsTable';
+import { tableConfig } from './configs/dataConfigs';
+import { prepareData } from "./helpers/businessHelpers";
+import { Alert } from "@material-ui/lab";
+import {useDispatch} from "react-redux";
+import { setFirms } from './features/firms/firmsSlice';
+import Content from "./components/Content";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-function App() {
+const App = () => {
   const { response, error, isLoading } = useFakeFetch();
+  const dispatch = useDispatch();
 
-  console.log(response, error, isLoading)
+  useEffect(() => {
+    if (response.length && !isLoading && !error) {
+      const data = prepareData(response)
+      
+      dispatch(setFirms(data))
+    }
+  }, [response, error, isLoading, dispatch])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      {
+        error
+          ? <Alert severity="error">{error.error}</Alert>
+          : isLoading
+            ? <CircularProgress style={{ marginTop: '30%' }}/>
+            : <Content/>
+      }
     </div>
   );
 }

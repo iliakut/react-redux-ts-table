@@ -8,6 +8,18 @@
   "id": 2,
   "name": "Solar Firma",
   "budget": 1123.2200,
-  "budget_spent": 451.3754,
+  "budget_spent": 451.3154,
   "date_of_first_purchase": "2120-01-14"
+}, {
+  "id": 3,
+  "name": "Vegetables Firma",
+  "budget": 112.2200,
+  "budget_spent": 4.3534,
+  "date_of_first_purchase": "2120-01-15"
+}, {
+  "id": 4,
+  "name": "Water Firma",
+  "budget": 2223.2200,
+  "budget_spent": 51.3854,
+  "date_of_first_purchase": "2120-01-16"
 }]
