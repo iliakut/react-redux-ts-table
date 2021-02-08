@@ -1,15 +1,12 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import useFakeFetch from './customHooks/useFakeFetch';
-import { Container } from '@material-ui/core';
-import FirmsTable from './components/FirmsTable';
-import { tableConfig } from './configs/dataConfigs';
-import { prepareData } from "./helpers/businessHelpers";
-import { Alert } from "@material-ui/lab";
-import {useDispatch} from "react-redux";
+import { prepareData } from './helpers/businessHelpers';
+import { Alert } from '@material-ui/lab';
+import {useDispatch} from 'react-redux';
 import { setFirms } from './features/firms/firmsSlice';
-import Content from "./components/Content";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Content from './components/Content';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const App = () => {
   const { response, error, isLoading } = useFakeFetch();
