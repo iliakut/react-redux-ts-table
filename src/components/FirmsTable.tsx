@@ -23,7 +23,7 @@ const FirmsTable: React.FC<FirmsTableProps> = ({ headers, rows, rowsKeysToShow }
         {
           rowsKeysToShow.map((key, index) => {
             if (key === 'name') {
-              return<TableCell key={row.name + index}><Modal id={row.id} text={row[key]}/></TableCell>;
+              return<TableCell key={row.name + index}><Modal id={row.id}/></TableCell>;
             }
             return <TableCell key={row.name + index}>{row[key]}</TableCell>;
           })

@@ -12,10 +12,9 @@ import { setStateNewBudget } from '../features/firms/firmsSlice';
 
 type ModalProps = {
   id: number
-  text: string
 }
 
-const Modal: React.FC<ModalProps> = ({ id, text }) => {
+const Modal: React.FC<ModalProps> = ({ id }) => {
   const [open, setOpen] = useState(false);
   const firm = useSelector((state: RootState) => state.firms.firms.find(firm => firm.id === id));
   const [newBudget, setNewBudget] = useState(0);
@@ -56,7 +55,7 @@ const Modal: React.FC<ModalProps> = ({ id, text }) => {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        {text}
+        {firm?.name}
       </Button>
       {
         firm
@@ -69,7 +68,8 @@ const Modal: React.FC<ModalProps> = ({ id, text }) => {
               <TextField
                 autoFocus
                 margin="dense"
-                id="name"
+                id="budget"
+                label="Budget"
                 type="number"
                 fullWidth
                 value={newBudget}
